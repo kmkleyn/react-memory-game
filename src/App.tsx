@@ -1,8 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
+import IMAGES from './img'
 import { Counter } from './features/counter/Counter';
 import './App.css';
 import { Deck, Card } from './Cards';
+
+// const importAll = (r: {}) => {
+//   let images = {};
+//   r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+//   return images;
+// }
 
 const FaceValue = [
   "A",
@@ -68,10 +75,20 @@ const createFullDeck = (splitDeck1: Deck, splitDeck2: Deck) => {
   return fullDeck;
 }
 
+const getImages = (fullDeck: Deck) => {
+  var counter: number = 0
+  fullDeck.cards.forEach(
+    (card) => {
+    card.src = IMAGES[counter]
+    counter++;
+  })
+}
+
 const splitDeckA = createSplitDeck(createSuit("club"), createSuit("diamond"), "red");
 const splitDeckB = createSplitDeck(createSuit("spade"), createSuit("heart"), "black");
 
 const fullDeck = createFullDeck(splitDeckA, splitDeckB);
+getImages(fullDeck)
 
 const shuffleDeck = (deck: Deck) => {
   const shuffledCards = deck.cards.sort(() => Math.random() - 0.5);
@@ -87,8 +104,8 @@ function App() {
         {shuffledDeck.map((card) => (
           <div className="card" key={card.id}>
             <div>
-              <img className="front" src={card.src} alt="card front" />
-              <img className="back" src="/img/cover.svg" alt="card back" />
+              <img className="front" src={card.src.default} alt="card front" />
+              <img className="back" src={IMAGES[54].default} alt="card back" />
             </div>
           </div>
         ))}
