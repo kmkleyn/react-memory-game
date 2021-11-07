@@ -2,29 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
-//import { runInThisContext } from 'vm';
-
-class Deck {
-  cards: Card[] = [];
-}
-
-class Card {
-  id: number;
-  matchId: number;
-  src: string;
-  suit: string;
-  value: string;
-  flipped: boolean;
-  matched: boolean;
-
-  constructor(suit: string, value: string) {
-    this.suit = suit;
-    this.value = value;
-    this.src = `img/${value}_${suit}`;
-    this.flipped = false;
-    this.matched = false;
-  }
-}
+import { Deck, Card } from './Cards';
 
 const FaceValue = [
   "A",
@@ -95,9 +73,26 @@ const splitDeckB = createSplitDeck(createSuit("spade"), createSuit("heart"), "bl
 
 const fullDeck = createFullDeck(splitDeckA, splitDeckB);
 
+const shuffleDeck = (deck: Deck) => {
+  const shuffledCards = deck.cards.sort(() => Math.random() - 0.5);
+  return shuffledCards;
+} 
+
+const shuffledDeck = shuffleDeck(fullDeck);
+
 function App() {
   return (
     <div className="App">
+      <div className="card-grid">
+        {shuffledDeck.map((card) => (
+          <div className="card" key={card.id}>
+            <div>
+              <img className="front" src={card.src} alt="card front" />
+              <img className="back" src="/img/cover.svg" alt="card back" />
+            </div>
+          </div>
+        ))}
+      </div>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <Counter />
