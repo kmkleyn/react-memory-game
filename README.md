@@ -1,11 +1,3 @@
-<div align="center" id="top"> 
-  <img src="./.github/app.gif" alt="React Memory Game" />
-
-  &#xa0;
-
-  <!-- <a href="https://reactmemorygame.netlify.app">Demo</a> -->
-</div>
-
 <h1 align="center">React Memory Game</h1>
 
 <p align="center">
