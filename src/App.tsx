@@ -123,6 +123,7 @@ function App() {
       } else {
         console.log("Those cards do not match...");
       }
+      // the turn is reset after two cards have been chosen
       resetTurn();
     }
   }, [choiceOne, choiceTwo])
