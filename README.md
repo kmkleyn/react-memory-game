@@ -34,7 +34,7 @@ A card flip memory game made in React.
 
 ## :dart: How to Play the Minimal Viable Product
 1. Open the console in the browser.
-2. Click Reset Game
+2. Click New Game
 3. Click on the back of two cards to match them (cards must match in colour and number, or the two jokers match one another).
 4. The console will display the two cards and a message that states whether the cards have been matched or not.
 
