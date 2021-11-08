@@ -1,9 +1,8 @@
-import React from 'react';
-import logo from './logo.svg';
-import IMAGES from './img'
-import { Counter } from './features/counter/Counter';
+import React, {useState} from 'react';
+import IMAGES from './img';
 import './App.css';
 import { Deck, Card } from './Cards';
+import SingleCard from './components/SingleCard';
 
 // const importAll = (r: {}) => {
 //   let images = {};
@@ -87,74 +86,27 @@ const getImages = (fullDeck: Deck) => {
 const splitDeckA = createSplitDeck(createSuit("club"), createSuit("diamond"), "red");
 const splitDeckB = createSplitDeck(createSuit("spade"), createSuit("heart"), "black");
 
-const fullDeck = createFullDeck(splitDeckA, splitDeckB);
+const fullDeck: Deck = createFullDeck(splitDeckA, splitDeckB);
 getImages(fullDeck)
 
-const shuffleDeck = (deck: Deck) => {
-  const shuffledCards = deck.cards.sort(() => Math.random() - 0.5);
-  return shuffledCards;
-} 
-
-const shuffledDeck = shuffleDeck(fullDeck);
-
 function App() {
+  const [cards, setCards] = useState<Card[]>([]);
+
+  const shuffleDeck = () => {
+    const shuffledCards = [...fullDeck.cards].sort(() => Math.random() - 0.5);
+    setCards(shuffledCards);
+    console.log(cards);
+  }
+
   return (
     <div className="App">
+      <h1>Memory</h1>
+      <button onClick={() => shuffleDeck()}>Reset Game</button>
       <div className="card-grid">
-        {shuffledDeck.map((card) => (
-          <div className="card" key={card.id}>
-            <div>
-              <img className="front" src={card.src.default} alt="card front" />
-              <img className="back" src={IMAGES[54].default} alt="card back" />
-            </div>
-          </div>
+        {cards.map((card) => (
+          <SingleCard key={card.id} card={card} />
         ))}
       </div>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
     </div>
   );
 }
