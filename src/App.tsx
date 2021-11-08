@@ -123,6 +123,7 @@ function App() {
       } else {
         console.log("Those cards do not match...");
       }
+      // the turn is reset after two cards have been chosen
       resetTurn();
     }
   }, [choiceOne, choiceTwo])
@@ -136,7 +137,7 @@ function App() {
   return (
     <div className="App">
       <h1>Memory</h1>
-      <button onClick={() => shuffleDeck()}>Reset Game</button>
+      <button onClick={() => shuffleDeck()}>New Game</button>
       <div className="card-grid">
         {cards.map((card) => (
           <SingleCard 
