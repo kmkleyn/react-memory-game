@@ -2,6 +2,9 @@
 export class Deck {
   cards: Card[] = [];
 }
+
+// NOTE: The matchId is used to check whether the two cards chosen match one another
+// i.e. Cards that have the same colour and number will have the same matchId
 export class Card {
   id: number;
   matchId: number;
@@ -14,7 +17,6 @@ export class Card {
   constructor(suit: string, value: string) {
     this.suit = suit;
     this.value = value;
-    // this.src = `img/${value}_${suit}.svg`;
     this.flipped = false;
     this.matched = false;
   }
